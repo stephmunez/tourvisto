@@ -33,7 +33,7 @@ const NavItems = ({ handleClick }: { handleClick?: () => void }) => {
                   <img
                     src={icon}
                     alt={label}
-                    className={`group-hover:brightness-0 size-0 group-hover:invert ${
+                    className={`group-hover:brightness-0 size-5 group-hover:invert ${
                       isActive ? 'brightness-0 invert' : 'text-dark-200'
                     }`}
                   />
