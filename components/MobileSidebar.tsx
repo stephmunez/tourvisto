@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import { SidebarComponent } from '@syncfusion/ej2-react-navigations';
+import { useEffect } from 'react';
 import { Link } from 'react-router';
 import NavItems from './NavItems';
 
@@ -10,6 +11,10 @@ const MobileSidebar = () => {
   const toggleSidebar = () => {
     sidebar.toggle();
   };
+
+  useEffect(() => {
+    toggleSidebar();
+  }, []);
 
   return (
     <div className="mobile-sidebar wrapper">
