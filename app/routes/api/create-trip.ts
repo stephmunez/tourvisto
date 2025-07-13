@@ -7,6 +7,7 @@ import { parseMarkdownToJson } from '~/lib/utils';
 export const action = async ({ request }: ActionFunctionArgs) => {
   const {
     country,
+    destination,
     numberOfDays,
     travelStyle,
     interests,
@@ -19,7 +20,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const unsplashApiKey = process.env.UNSPLASH_ACCESS_KEY!;
 
   try {
-    const prompt = `Generate a ${numberOfDays}-day travel itinerary for ${country} based on the following user information:
+    const prompt = `Generate a ${numberOfDays}-day travel itinerary for ${destination} ${country} based on the following user information:
         Budget: '${budget}'
         Interests: '${interests}'
         TravelStyle: '${travelStyle}'
@@ -73,7 +74,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const trip = parseMarkdownToJson(textResult.response.text());
 
     const imageResponse = await fetch(
-      `https://api.unsplash.com/search/photos?query=${country} ${interests} ${travelStyle}&client_id=${unsplashApiKey}`
+      `https://api.unsplash.com/search/photos?query=${destination} ${country} ${interests} ${travelStyle}&client_id=${unsplashApiKey}`
     );
 
     const imageUrls = (await imageResponse.json()).results
@@ -91,8 +92,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         userId,
       }
     );
-
-    console.log(result);
 
     return data({ id: result.$id });
   } catch (e) {
