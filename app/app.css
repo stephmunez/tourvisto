@@ -132,6 +132,10 @@
     div {
       @apply w-full flex flex-col gap-2.5 px-6 relative;
     }
+    #maps_control_1 {
+      @apply px-0;
+    }
+
     label {
       @apply text-sm font-normal text-gray-100;
     }
