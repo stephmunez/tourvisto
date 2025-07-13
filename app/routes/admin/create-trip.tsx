@@ -34,6 +34,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
 
   const [formData, setFormData] = useState<TripFormData>({
     country: countries[0]?.name || '',
+    destination: '',
     travelStyle: '',
     interest: '',
     budget: '',
@@ -57,6 +58,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
 
     if (
       !formData.country ||
+      !formData.destination ||
       !formData.travelStyle ||
       !formData.interest ||
       !formData.budget ||
@@ -67,8 +69,8 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
       return;
     }
 
-    if (formData.duration < 1 || formData.duration > 10) {
-      setError('Duration must be between 1 and 10 days');
+    if (formData.duration < 1 || formData.duration > 14) {
+      setError('Duration must be between 1 and 14 days');
       setLoading(false);
       return;
     }
@@ -79,6 +81,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           country: formData.country,
+          destination: formData.destination,
           numberOfDays: formData.duration,
           travelStyle: formData.travelStyle,
           interests: formData.interest,
@@ -154,6 +157,18 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
                     }))
                 );
               }}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="duration">Destination</label>
+            <input
+              id="destination"
+              name="destination"
+              type="text"
+              placeholder="Enter one or more cities or places (e.g., Bali, Tokyo, Amsterdam)"
+              className="form-input placeholder:text-gray-100"
+              onChange={(e) => handleChange('destination', e.target.value)}
             />
           </div>
 
