@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { logoutUser } from '~/appwrite/auth';
 
 const PageLayout = () => {
@@ -11,17 +11,7 @@ const PageLayout = () => {
 
   return (
     <div>
-      <button onClick={handleLogout} className="cursor-pointer">
-        <img src="/assets/icons/logout.svg" alt="logout" className="size-6" />
-      </button>
-
-      <button
-        onClick={() => {
-          navigate('/dashboard');
-        }}
-      >
-        Dashboard
-      </button>
+      <Link to={'/dashboard'}>Go to Dashboard</Link>
     </div>
   );
 };
